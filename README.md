@@ -36,7 +36,8 @@ Imbalance in the outcome variable addressed through undersampling.
 Results:
 
 Logistic regression with a reduced ratio of stroke to non-stroke cases achieved the best results (Precision: 0.93, Recall: 1, Accuracy: 97.26%).
-Recommendations
+
+Recommendations:
 
 Model Selection: Logistic regression with a balanced ratio yielded optimal results.
 
