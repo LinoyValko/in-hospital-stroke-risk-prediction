@@ -1,53 +1,96 @@
-Project Overview:
+# Predicting In-Hospital Stroke Risk After Catheterization  
+---
 
-This project, led by Moriya Yulzari and Linoy Valko, aims to predict the risk of in-hospital stroke among patients treated with catheterization. The project utilizes a dataset obtained from the MIMIC-IV database, comprising information about patients' medical history and outcomes.
+## Project Overview  
+This project aims to **predict the risk of in-hospital stroke** among patients treated with **catheterization**, using data from the **MIMIC-IV** database.  
+The model is designed to support medical professionals in identifying high-risk patients and improving prioritization in clinical settings.
 
-Background:
+---
 
-Every year, a substantial number of catheterizations are performed, with a potential risk of post-procedure complications, such as blood clot formation leading to strokes. The identification of at-risk patients is crucial for prioritizing treatment and preventing adverse events. This project addresses this challenge using machine learning.
+## Background  
+Catheterization is a widely performed medical procedure. Despite its benefits, it carries the risk of complications such as **blood clot formation**, which can lead to **ischemic strokes**.  
+Timely identification of at-risk patients is critical for **early intervention** and **stroke prevention**.  
+This project leverages machine learning to address this challenge.
 
-Aim of the Project:
+---
 
-The primary goal is to create a predictive model that classifies patients into two groups: those who had a stroke during hospitalization after catheterization and those who did not. The model aims to assist medical professionals in prioritizing treatments based on predicted stroke risk, thereby minimizing errors in patient prioritization and allowing better focus on prevention.
+## Aim of the Project  
+To develop a **predictive model** that classifies patients into two groups:
+- Patients **without** an in-hospital stroke after catheterization  
+- Patients **with** an in-hospital stroke after catheterization  
 
-Data Variables:
+**Objective:**  
+Improve treatment prioritization and minimize preventable strokes during hospitalization.
 
-has_stroke_disease: Outcome variable indicating the occurrence of stroke (0: No, 1: Yes)
-subject_id: Patient ID
-hamd_id: Patient hospitalization number
-gender: Gender of the patient (0: Female, 1: Male)
-anchor_age: Patient's age in years
-Additional variables indicating the presence of specific diseases based on ICD codes.
-Data Preprocessing
-The dataset was filtered to include only patients who underwent catheterization. Categorical variables, such as gender, were encoded. No numeric variables were used, eliminating concerns about outliers and scaling.
+---
 
-Methodology:
+## Data Description
 
-1. Model Selection Attempted SVM initially but faced challenges with class imbalance.
-2. Experimented with random forest, achieving moderate results.
-3. Finalized the logistic regression model due to good precision and recall scores.
+**Source:** [MIMIC-IV](https://physionet.org/content/mimiciv/2.2/) medical database  
+**Target Variable:**
+- `has_stroke_disease`:  
+  - `0` – No in-hospital stroke  
+  - `1` – In-hospital stroke occurred  
 
-Evaluation Metrics:
+**Key Features:**
 
-Accuracy, recall, and precision were chosen as evaluation metrics.
-Challenges
-Imbalance in the outcome variable addressed through undersampling.
+| Variable         | Description                                      |
+|------------------|--------------------------------------------------|
+| `subject_id`     | Patient identifier                               |
+| `hadm_id`        | Hospital admission ID                            |
+| `gender`         | Gender (0: Female, 1: Male)                      |
+| `anchor_age`     | Age in years                                     |
+| ICD features     | Comorbidities based on diagnosis codes           |
 
-Results:
+**Preprocessing Highlights:**
+- Included only patients who underwent catheterization  
+- Categorical variables were encoded  
+- No need for normalization (no continuous numeric variables)  
 
-Logistic regression with a reduced ratio of stroke to non-stroke cases achieved the best results (Precision: 0.93, Recall: 1, Accuracy: 97.26%).
+---
 
-Recommendations:
+## Methodology  
 
-Model Selection: Logistic regression with a balanced ratio yielded optimal results.
+1. **Model Selection:**
+   - Initial model: **SVM** → poor results due to class imbalance  
+   - Second model: **Random Forest** → moderate results  
+   - Final model: **Logistic Regression** → best balance of performance metrics  
 
-Data Expansion: Consider expanding the dataset with numeric features for further improvement.
+2. **Class Imbalance Handling:**
+   - Used **undersampling** of the majority class (non-stroke)
 
-Hyperparameter Tuning: Experiment with different hyperparameter values for models.
+3. **Evaluation Metrics:**
+   - **Precision** – correctness of positive stroke predictions  
+   - **Recall** – how many actual strokes were identified  
+   - **Accuracy** – overall correct predictions  
 
-Generalization: Address the challenge of class imbalance for better generalization.
+---
 
-Acknowledgments
-The project utilizes data from the MIMIC-IV database.
+## Results  
 
-Inspiration from "Ischemic Strokes After Cardiac Catheterization-Opportune Thrombolysis Candidates" article.
+| Metric     | Score    |
+|------------|----------|
+| Precision  | 0.93     |
+| Recall     | 1.00     |
+| Accuracy   | 97.26%   |
+
+Best results were achieved using **Logistic Regression** with a balanced dataset.
+
+---
+
+## Recommendations  
+
+- **Model:** Logistic Regression is effective when balanced  
+- **Features:** Add numeric features (e.g., lab data) to improve performance  
+- **Tuning:** Use regularization and hyperparameter search  
+- **Imbalance:** Continue handling with sampling or weighted losses
+
+---
+
+## Acknowledgments  
+
+- Dataset from **MIMIC-IV**  
+- Research inspired by:  
+  *“Ischemic Strokes After Cardiac Catheterization – Opportune Thrombolysis Candidates”*
+
+---
